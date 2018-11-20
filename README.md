@@ -1,7 +1,7 @@
-# monitoring
-
-This version is for a slim version of the original deployment. This does not require storage and secret.
-This version also disabled alertManager in Prometheus.
+# Monitoring Prometheus and Grafana
+Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin.monitoring.html
+###This version is for a slim version of the original deployment. This does not require storage and secret.
+###This version also disabled alertManager in Prometheus.
 1. kubectl create namespace monitoring
 2. Create rbac.yaml file
 ```
@@ -46,7 +46,7 @@ alertmanager:
 server:
   persistentVolume:
     enabled: false
-    ```
+```
 5. helm install stable/prometheus --namespace monitoring --name prometheus --values prometheus-config.yaml
 6. Check if everything is deployed well
 kubectl -n monitoring get po | grep prometheus
@@ -54,7 +54,6 @@ kubectl -n monitoring get po | grep prometheus
 kubectl get service -n monitoring| grep prometheus-server|awk '{print $3}
 8. Create prometheus-grafana-datasource.yaml
 ```
----
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -75,7 +74,7 @@ data:
       access: proxy
       orgId: 1
       isDefault: true
-      ```
+  ```
 9. kubectl create -f prometheus-grafana-datasource.yaml 
 10. Create grafana-config.yaml
 ```
@@ -93,7 +92,7 @@ sidecar:
   dashboards:
     enabled: true
     label: grafana_dash
-    ```
+```
 11. helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml 
 12. grafana will take up to 10 min. check if all the three pods are deployed.
 kubectl -n monitoring get po | grep grafana
