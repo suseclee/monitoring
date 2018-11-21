@@ -22,6 +22,9 @@ subjects:
   name: prometheus-kube-state-metrics
   namespace: monitoring
 - kind: ServiceAccount
+  name: prometheus-pushgateway
+  namespace: monitoring
+- kind: ServiceAccount
   name: prometheus-node-exporter
   namespace: monitoring  
 - kind: ServiceAccount
@@ -38,10 +41,6 @@ subjects:
 # Alertmanager configuration
 alertmanager:
   enabled: false
-# Disable Pushgateway
-pushgateway:
-  enabled: false  
-# Prometheus configuration
 server:
   persistentVolume:
     enabled: false
