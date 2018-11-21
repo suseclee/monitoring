@@ -51,7 +51,7 @@ server:
 #### 6. Check if everything is deployed well
 ```kubectl -n monitoring get po | grep prometheus```
 #### 7. Get the ip address for prometheus-server
-```kubectl get service -n monitoring| grep prometheus-server|awk '{print $3}```
+```kubectl get service -n monitoring| grep prometheus-server|awk '{print $3}'```
 #### 8. Create prometheus-grafana-datasource.yaml
 ```
 kind: ConfigMap
