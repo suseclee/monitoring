@@ -4,39 +4,7 @@ Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin
 ### This version also disabled alertManager in Prometheus.
 #### 1. Create a new namespace for monitoring 
 ```kubectl create namespace monitoring```
-#### 2. Create rbac.yaml file
-```
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: monitoring
-roleRef:
-  kind: ClusterRole
-  name: suse:caasp:psp:privileged
-  apiGroup: rbac.authorization.k8s.io
-subjects:
-- kind: ServiceAccount
-  name: default
-  namespace: monitoring
-- kind: ServiceAccount
-  name: prometheus-kube-state-metrics
-  namespace: monitoring
-- kind: ServiceAccount
-  name: prometheus-pushgateway
-  namespace: monitoring
-- kind: ServiceAccount
-  name: prometheus-node-exporter
-  namespace: monitoring  
-- kind: ServiceAccount
-  name: prometheus-server
-  namespace: monitoring  
-- kind: ServiceAccount
-  name: grafana
-  namespace: monitoring 
-  ```
-#### 3. Create role base access control for Prometheus and Grafana
-```kubectl apply -f  rbac.yaml```
-#### 4. create prometheus-config.yaml
+#### 2. create prometheus-config.yaml
 ```
 # Alertmanager configuration
 alertmanager:
@@ -64,16 +32,22 @@ pushgateway:
 
 # Prometheus configuration
 server:
+  service:
+    type: NodePort
   persistentVolume:
     enabled: false
 ```
-#### 5. Create a Prometheus using helm with prometheus-config.yaml
+#### 3. Create a Prometheus using helm with prometheus-config.yaml
 ```helm install stable/prometheus --namespace monitoring --name prometheus --values prometheus-config.yaml```
-#### 6. Check if everything is deployed well
+#### 4. Check if everything is deployed well
 ```kubectl -n monitoring get po | grep prometheus```
-#### 7. Get the ip address for prometheus-server
-```kubectl get service -n monitoring| grep prometheus-server|awk '{print $3}'```
-#### 8. Create prometheus-grafana-datasource.yaml
+#### 5. Check the promethus web using the follwoing url and port
+```
+export NODE_PORT=$(kubectl get --namespace monitoring -o jsonpath="{.spec.ports[0].nodePort}" services prometheus-server)
+export NODE_IP=$(kubectl get nodes --namespace monitoring -o jsonpath="{.items[0].status.addresses[0].address}")
+echo http://$NODE_IP:$NODE_PORT
+```
+#### 6. Create prometheus-grafana-datasource.yaml using url:port from #5
 ```
 kind: ConfigMap
 apiVersion: v1
@@ -91,31 +65,24 @@ data:
     datasources:
     - name: Prometheus
       type: prometheus
-      url: http://<prometheus.server.ip.address>:80
+      url: http://<prometheus.server.ip.address>:<port>
       access: proxy
       orgId: 1
       isDefault: true
   ```
-#### 9. Create a configMap for mapping between Prometheus and Grafana
+#### 7. Create a configMap for mapping between Prometheus and Grafana
 ```kubectl create -f prometheus-grafana-datasource.yaml``` 
-#### 10. Create grafana-config.yaml
+#### 8. Create grafana-config.yaml
 ```
 service:
   type: NodePort
+  
 # Configure admin password
 adminPassword: admin
 
 # Ingress configuration
 ingress:
   enabled: false
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  hosts:
-    - grafana.example.com
-  tls:
-    - hosts:
-      - grafana.example.com
-      secretName: monitoring-tls
 
 # Configure persistent storage
 persistence:
@@ -130,24 +97,24 @@ sidecar:
     enabled: true
     label: grafana_dashboard
 ```
-#### 11. Create Grafana using helm with grafana-config.yaml
+#### 9. Create Grafana using helm with grafana-config.yaml
 ```helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml``` 
-#### 12. grafana will take up to 10 min. check if all the three pods are deployed.
+#### 10. grafana will take up to 10 min. check if all the three pods are deployed.
 ```kubectl -n monitoring get po | grep grafana```
-#### 13. Login to grafana-server with username/password from grafana-config.yaml
+#### 11. Login to grafana-server with username/password from grafana-config.yaml
 ```
 export NODE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services grafana -n monitoring)
 export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
 echo http://$NODE_IP:$NODE_PORT/
 ```
 
-#### 14. Add a new dashboard - "Kubernetes All Nodes" will be shown "System load" panel only.
+#### 12. Add a new dashboard - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
     1. On the home page of Grafana, hover your mousecursor over the + button on the left sidebar and click on the importmenuitem.
     2. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
     3. Now select the "Prometheus" datasource in the prometheus field and click on the import button.
 ```
-#### 15. There are extra dashboards configured for CAASP. To appply this
+#### 13. There are extra dashboards configured for CAASP. To appply this
 ```
     1. git clone https://github.com/kubic-project/monitoring.git
     2. kubectl apply -f monitoring/grafana-dashboards-caasp-cluster.yaml
@@ -155,4 +122,4 @@ echo http://$NODE_IP:$NODE_PORT/
     4. kubectl apply -f monitoring/grafana-dashboards-caasp-nodes.yaml
     5. kubectl apply -f monitoring/grafana-dashboards-caasp-pods.yaml
 ```
-#### 16. All the configured dashboards will be shown in grafana 
+#### 14. All the configured dashboards will be shown in grafana 
