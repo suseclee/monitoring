@@ -41,6 +41,28 @@ subjects:
 # Alertmanager configuration
 alertmanager:
   enabled: false
+
+# Create a specific service account
+serviceAccounts:
+  nodeExporter:
+    name: prometheus-node-exporter
+
+# Allow scheduling of node-exporter on master nodes
+nodeExporter:
+  hostNetwork: false
+  hostPID: false
+  podSecurityPolicy:
+    enabled: true
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+
+# Disable Pushgateway
+pushgateway:
+  enabled: false
+
+# Prometheus configuration
 server:
   persistentVolume:
     enabled: false
@@ -80,10 +102,25 @@ data:
 ```
 service:
   type: NodePort
+# Configure admin password
+adminPassword: admin
+
+# Ingress configuration
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - grafana.example.com
+  tls:
+    - hosts:
+      - grafana.example.com
+      secretName: monitoring-tls
+
+# Configure persistent storage
 persistence:
   enabled: false
-adminUser: admin
-adminPassword: admin
+
 # Enable sidecar for provisioning
 sidecar:
   datasources:
@@ -91,7 +128,7 @@ sidecar:
     label: grafana_datasource
   dashboards:
     enabled: true
-    label: grafana_dash
+    label: grafana_dashboard
 ```
 #### 11. Create Grafana using helm with grafana-config.yaml
 ```helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml``` 
