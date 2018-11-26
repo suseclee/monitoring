@@ -47,6 +47,7 @@ export NODE_PORT=$(kubectl get --namespace monitoring -o jsonpath="{.spec.ports[
 export NODE_IP=$(kubectl get nodes --namespace monitoring -o jsonpath="{.items[0].status.addresses[0].address}")
 echo http://$NODE_IP:$NODE_PORT
 ```
+#### 5-1. On Prometheus from url #11, you can query to Prometheus (optional).
 #### 6. Create prometheus-grafana-datasource.yaml using url:port from #5
 ```
 kind: ConfigMap
@@ -107,7 +108,6 @@ export NODE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services 
 export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
 echo http://$NODE_IP:$NODE_PORT/
 ```
-#### 11-1. On Prometheus from url #11, you can query to Prometheus (optional).
 #### 12. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
     1. On the Grafana from url #11 with admin/admin (username/password), enter new password.
