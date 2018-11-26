@@ -1,4 +1,4 @@
-# Monitoring Prometheus and Grafana
+# Monitoring Prometheus and Grafana without persistentVolumes
 *Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin.monitoring.html
 This version is for a slim version of the original deployment. This does not require any storage and secret.
 This version also disabled alertManager in Prometheus.*
