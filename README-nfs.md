@@ -177,7 +177,10 @@ ingress:
 
 # Configure persistent storage
 persistence:
-  enabled: false
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  existingClaim: nfs-pvc
 
 # Enable sidecar for provisioning
 sidecar:
