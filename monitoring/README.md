@@ -23,18 +23,19 @@ echo http://$NODE_IP:$NODE_PORT
 ```helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml``` 
 #### 8. grafana will take up to 10 min. check if all the three pods are deployed.
 ```kubectl -n monitoring get po | grep grafana```
-#### 9. Login to grafana web with username/password - admin/admin as a default from grafana-config.yaml. Get url from the following: 
+#### 9. Login to grafana web
+     + admin/admin as a default from grafana-config.yaml. Get url from the following: 
 ```
 export NODE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services grafana -n monitoring)
 export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
 echo http://$NODE_IP:$NODE_PORT/
 ```
+     + On the Grafana from url #11 with admin/admin (username/password), enter new password.
 #### 10. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
-    1. On the Grafana from url #11 with admin/admin (username/password), enter new password.
-    2. hover your mousecursor over the + button on the left sidebar and click on the importmenuitem.
-    3. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
-    4. Now select the "Prometheus" datasource in the prometheus field and click on the import button.
+    1. hover your mousecursor over the + button on the left sidebar and click on the importmenuitem.
+    2. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
+    3. Now select the "Prometheus" datasource in the prometheus field and click on the import button.
 ```
 #### 11. There are extra dashboards configured for CAASP. To appply this
 ```
