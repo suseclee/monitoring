@@ -48,8 +48,8 @@ status:
 #### 3. Create PV and PVC  
 ```kubectl apply -f pv-pvc-monitoring.yaml```
 #### 4. Verify the PV and PVC  
-1. ```kubectl get pv```  
-1. ```kubectl get pvc -n monitoring```  
++ ```kubectl get pv```  
++ ```kubectl get pvc -n monitoring```  
 #### 5. Testing persistentVolumeClaim with test-pod.yaml  
    1. create test-pod.yaml file
    ~~~
@@ -77,15 +77,15 @@ status:
             claimName: nfs-pvc
    ~~~
    2. ```kubeclt apply -f test-pod.yaml```  
-   3. check the test-pod    
-        + if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS.  
-        ```kubectl get pod -n monitoring```    
-        * if you see test-pod is completed, then you are ready to use nfs PVC.   
-        ```kubectl get pod -n monitoring --show-all```       
+   3. check the test-pod  
+      + if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS.  
+      ```kubectl get pod -n monitoring```    
+      + if you see test-pod is completed, then you are ready to use nfs PVC.   
+      ```kubectl get pod -n monitoring --show-all```       
    4. check the NFS-SUCCESS file created by test-pod.yaml  
-      i. ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
-      ii. you should see new file name NFS-SUCCESS in ```ls -al /mnt```   
-      iii. ```umount /mnt```   
+      + ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
+      + you should see new file name NFS-SUCCESS in ```ls -al /mnt```   
+      + ```umount /mnt```   
 #### 6. Create prometheus-config.yaml
 ```
 # Alertmanager configuration
