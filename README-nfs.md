@@ -76,15 +76,15 @@ status:
          persistentVolumeClaim:
            claimName: nfs-pvc
    ~~~
-   >1. kubeclt apply -f test-pod.yaml
-   >1. check the test-pod
+   >2. kubeclt apply -f test-pod.yaml
+   >3. check the test-pod
         >if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS 
         ```kubectl get pod -n monitoring```
         >if you see test-pod is completed, then you are readsy to use nfs PVC.
         ```kubectl get pod -n monitoring --show-all```
-   >1. check the NFS-SUCCESS file created by test-pod.yaml
-       >1. ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```  
-       >1. you should see new file name NFS-SUCCESS in ```ls -al /mnt```
-       >1. ```umount /mnt```
+   >4. check the NFS-SUCCESS file created by test-pod.yaml  
+      i. ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
+      ii. you should see new file name NFS-SUCCESS in ```ls -al /mnt```   
+      iii. ```umount /mnt```   
 #### 6.
    
