@@ -102,7 +102,7 @@ sidecar:
 ```helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml``` 
 #### 10. grafana will take up to 10 min. check if all the three pods are deployed.
 ```kubectl -n monitoring get po | grep grafana```
-#### 11. Login to grafana webr with username/password - admin/admin as a default from grafana-config.yaml. Get url from the following: 
+#### 11. Login to grafana web with username/password - admin/admin as a default from grafana-config.yaml. Get url from the following: 
 ```
 export NODE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services grafana -n monitoring)
 export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
