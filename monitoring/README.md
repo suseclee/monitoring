@@ -24,7 +24,7 @@ echo http://$NODE_IP:$NODE_PORT
 #### 8. grafana will take up to 10 min. check if all the three pods are deployed.
 ```kubectl -n monitoring get po | grep grafana```
 #### 9. Login to grafana web
-   * admin/admin as a default from grafana-config.yaml. Get url from the following:  
+   * Get Grafana url from the following:  
      ~~~
       export NODE_PORT=$    1. On the Grafana from url #11 with admin/admin (username/password), enter new password.(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services grafana -n monitoring)
       export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
