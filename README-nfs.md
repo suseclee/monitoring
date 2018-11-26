@@ -78,7 +78,7 @@ status:
    ~~~
    2. ```kubectl apply -f test-pod.yaml```  
    3. check the test-pod  
-      + if you see tes-pod is a pending status, then there is a problem with server connection or configuration to NFS.  
+      + if you see tes-pod is a pending status, then there is a problem with server connection, configuration to NFS client, or not enough storage space.  
       ```kubectl get pod -n monitoring```    
       + if you see test-pod is completed, then you are ready to use nfs PVC.   
       ```kubectl get pod -n monitoring --show-all```       
