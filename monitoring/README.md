@@ -26,11 +26,11 @@ echo http://$NODE_IP:$NODE_PORT
 #### 9. Login to grafana web
    * Get Grafana url from the following:  
      ~~~
-      export NODE_PORT=$    1. On the Grafana from url #11 with admin/admin (username/password), enter new password.(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services grafana -n monitoring)
+      export NODE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services grafana -n monitoring)
       export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
       echo http://$NODE_IP:$NODE_PORT/
      ~~~
-   * On the Grafana from url #11 with admin/admin (username/password), enter new password.   
+   * Login to grafana web with admin/admin (default username/password), enter new password.   
 #### 10. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
     1. hover your mousecursor over the + button on the left sidebar and click on the importmenuitem.
