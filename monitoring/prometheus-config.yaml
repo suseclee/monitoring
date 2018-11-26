@@ -1,0 +1,30 @@
+# Alertmanager configuration
+alertmanager:
+  enabled: false
+
+# Create a specific service account
+serviceAccounts:
+  nodeExporter:
+    name: prometheus-node-exporter
+
+# Allow scheduling of node-exporter on master nodes
+nodeExporter:
+  hostNetwork: false
+  hostPID: false
+  podSecurityPolicy:
+    enabled: true
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+
+# Disable Pushgateway
+pushgateway:
+  enabled: false
+
+# Prometheus configuration
+server:
+  service:
+    type: NodePort
+  persistentVolume:
+    enabled: false

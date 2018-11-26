@@ -1,0 +1,27 @@
+service:
+  type: NodePort
+  
+# Configure admin password
+adminPassword: admin
+
+# Ingress configuration
+ingress:
+  enabled: false
+
+# Configure persistent storage
+persistence:
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  #storageClassName: my-storage-class
+  #size: 10Gi
+  existingClaim: nfs-pvc
+
+# Enable sidecar for provisioning
+sidecar:
+  datasources:
+    enabled: true
+    label: grafana_datasource
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
