@@ -86,7 +86,7 @@ status:
       + ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
       + you should see new file name NFS-SUCCESS in ```ls -al /mnt```   
       + ```sudo rm /mnt/NFS-SUCCESS```
-      + ```umount /mnt```   
+      + ```sudo umount /mnt```   
 #### 6. Create prometheus-config.yaml
 ```
 # Alertmanager configuration
