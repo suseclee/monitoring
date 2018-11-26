@@ -52,7 +52,7 @@ status:
 ```kubectl get pvc -n monitoring```
 #### 5. Testing persistentVolumeClaim with test-pod.yaml
     1. create test-pof.yaml file
-   ~~~
+~~~
    kind: Pod
    apiVersion: v1
    metadata:
@@ -75,7 +75,7 @@ status:
        - name: vnfs
          persistentVolumeClaim:
            claimName: nfs-pvc
-   ~~~
+~~~
      1. kubeclt apply -f test-pod.yaml
      2. check the test-pod
         if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS 
