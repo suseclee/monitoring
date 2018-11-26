@@ -77,10 +77,10 @@ status:
             claimName: nfs-pvc
    ~~~
    2. ```kubeclt apply -f test-pod.yaml```  
-   3. check the test-pod    
-        + red if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS.  
+   3. check the test-pod    
+        + if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS.  
         ```kubectl get pod -n monitoring```    
-        * green if you see test-pod is completed, then you are ready to use nfs PVC.   
+        * if you see test-pod is completed, then you are ready to use nfs PVC.   
         ```kubectl get pod -n monitoring --show-all```       
    4. check the NFS-SUCCESS file created by test-pod.yaml  
       i. ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
