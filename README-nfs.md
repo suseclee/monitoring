@@ -142,7 +142,7 @@ export NODE_IP=$(kubectl get nodes --namespace monitoring -o jsonpath="{.items[0
 echo http://$NODE_IP:$NODE_PORT
 ```
 #### 9-1. On Prometheus from url #9, you can query to Prometheus (optional).
-#### 10. Create prometheus-grafana-datasource.yaml using url:port from #5
+#### 10. Create prometheus-grafana-datasource.yaml using url:port from #9
 ```
 kind: ConfigMap
 apiVersion: v1
