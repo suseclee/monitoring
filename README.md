@@ -1,7 +1,7 @@
 # Monitoring Prometheus and Grafana
-Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin.monitoring.html
-### This version is for a slim version of the original deployment. This does not require any storage and secret.
-### This version also disabled alertManager in Prometheus.
+*Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin.monitoring.html
+This version is for a slim version of the original deployment. This does not require any storage and secret.
+This version also disabled alertManager in Prometheus.*
 #### 1. Create a new namespace for monitoring 
 ```kubectl create namespace monitoring```
 #### 2. create prometheus-config.yaml
@@ -108,9 +108,9 @@ export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].a
 echo http://$NODE_IP:$NODE_PORT/
 ```
 
-#### 12. Add a new dashboard - "Kubernetes All Nodes" will be shown "System load" panel only.
+#### 12. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
-    1. On the home page of Grafana, hover your mousecursor over the + button on the left sidebar and click on the importmenuitem.
+    1. On the Grafana from url #11 with admin/admin (username/password), hover your mousecursor over the + button on the left sidebar and click on the importmenuitem.
     2. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
     3. Now select the "Prometheus" datasource in the prometheus field and click on the import button.
 ```
