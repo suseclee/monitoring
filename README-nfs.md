@@ -96,6 +96,8 @@ alertmanager:
     enabled: false
   persistentVolume:
     enabled: true
+    #storageClassName: my-storage-class
+    #size: 10Gi
     existingClaim: nfs-pvc
 
 # Create a specific service account
@@ -124,6 +126,8 @@ server:
     type: NodePort
   persistentVolume:
     enabled: true
+    #storageClassName: my-storage-class
+    #size: 10Gi
     existingClaim: nfs-pvc
 ```
 
@@ -180,6 +184,8 @@ persistence:
   enabled: true
   accessModes:
     - ReadWriteOnce
+  #storageClassName: my-storage-class
+  #size: 10Gi
   existingClaim: nfs-pvc
 
 # Enable sidecar for provisioning
