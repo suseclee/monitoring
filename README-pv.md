@@ -50,12 +50,12 @@ status:
 ```kubectl get pvc -n monitoring```
 4. Testing persistentVolumeClaim with test-pod.yaml
     1. create test-pof.yaml file
-    ```
-    kind: Pod
+```
+kind: Pod
 apiVersion: v1
 metadata:
   name: test-pod
-  #  namespace: kube-system
+  namespace: monitoring
 spec:
   containers:
   - name: test-pod
@@ -73,5 +73,5 @@ spec:
     - name: vnfs
       persistentVolumeClaim:
         claimName: prometheus-prometheus-k8s-db-prometheus-prometheus-k8s-0
-     ``` 
+``` 
    
