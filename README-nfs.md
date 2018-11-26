@@ -51,38 +51,38 @@ status:
 1. ```kubectl get pv```
 1. ```kubectl get pvc -n monitoring```
 #### 5. Testing persistentVolumeClaim with test-pod.yaml
-   >1. create test-pod.yaml file
+   1. create test-pod.yaml file
    ~~~
-   kind: Pod
-   apiVersion: v1
-   metadata:
-     name: test-pod
-     namespace: monitoring
-   spec:
-     containers:
-     - name: test-pod
-       image: gcr.io/google_containers/busybox:1.24
-       command:
-         - "/bin/sh"
-       args:
-         - "-c"
-         - "touch /mnt/NFS-SUCCESS && exit 0 || exit 1"
-       volumeMounts:
-         - name: vnfs
-           mountPath: /mnt
-     restartPolicy: "Never"
-     volumes:
-       - name: vnfs
-         persistentVolumeClaim:
-           claimName: nfs-pvc
+    kind: Pod
+    apiVersion: v1
+    metadata:
+      name: test-pod
+      namespace: monitoring
+    spec:
+      containers:
+      - name: test-pod
+        image: gcr.io/google_containers/busybox:1.24
+        command:
+          - "/bin/sh"
+        args:
+          - "-c"
+          - "touch /mnt/NFS-SUCCESS && exit 0 || exit 1"
+        volumeMounts:
+          - name: vnfs
+            mountPath: /mnt
+      restartPolicy: "Never"
+      volumes:
+        - name: vnfs
+          persistentVolumeClaim:
+            claimName: nfs-pvc
    ~~~
-   >2. kubeclt apply -f test-pod.yaml
-   >3. check the test-pod
-        >if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS 
+   2. kubeclt apply -f test-pod.yaml  
+   3. check the test-pod  
+        if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS 
         ```kubectl get pod -n monitoring```
-        >if you see test-pod is completed, then you are readsy to use nfs PVC.
+        if you see test-pod is completed, then you are readsy to use nfs PVC.
         ```kubectl get pod -n monitoring --show-all```
-   >4. check the NFS-SUCCESS file created by test-pod.yaml  
+   4. check the NFS-SUCCESS file created by test-pod.yaml  
       i. ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
       ii. you should see new file name NFS-SUCCESS in ```ls -al /mnt```   
       iii. ```umount /mnt```   
