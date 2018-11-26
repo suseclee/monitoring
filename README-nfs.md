@@ -199,7 +199,7 @@ sidecar:
 ```
 #### 13. Create Grafana using helm with grafana-config.yaml
 ```helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml``` 
-#### 14. grafana will take up to 10 min. check if all the three pods are deployed.
+#### 14. grafana will take up to 10 min if Grafana has a persistent option. check if all the three pods are deployed.
 ```kubectl -n monitoring get po | grep grafana```
 #### 15. Login to grafana-server with username/password from grafana-config.yaml
 ```
