@@ -47,7 +47,7 @@ export NODE_PORT=$(kubectl get --namespace monitoring -o jsonpath="{.spec.ports[
 export NODE_IP=$(kubectl get nodes --namespace monitoring -o jsonpath="{.items[0].status.addresses[0].address}")
 echo http://$NODE_IP:$NODE_PORT
 ```
-#### 5-1. On Prometheus from url #11, you can query to Prometheus (optional).
+#### 5-1. On Prometheus from url #5, you can query to Prometheus (optional).
 #### 6. Create prometheus-grafana-datasource.yaml using url:port from #5
 ```
 kind: ConfigMap
