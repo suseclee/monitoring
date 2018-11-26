@@ -45,12 +45,12 @@ status:
     storage: 8Gi
   phase: Bound
 ```
-#### 3. Create PV and PVC
+#### 3. Create PV and PVC  
 ```kubectl apply -f pv-pvc-monitoring.yaml```
-#### 4. Verify the PV and PVC
-1. ```kubectl get pv```
-1. ```kubectl get pvc -n monitoring```
-#### 5. Testing persistentVolumeClaim with test-pod.yaml
+#### 4. Verify the PV and PVC  
+1. ```kubectl get pv```  
+1. ```kubectl get pvc -n monitoring```  
+#### 5. Testing persistentVolumeClaim with test-pod.yaml  
    1. create test-pod.yaml file
    ~~~
     kind: Pod
@@ -76,7 +76,7 @@ status:
           persistentVolumeClaim:
             claimName: nfs-pvc
    ~~~
-   2. kubeclt apply -f test-pod.yaml  
+   2. ```kubeclt apply -f test-pod.yaml```  
    3. check the test-pod  
         if you see tes-pod is pending status, then there is a problem with server connection or configuration to NFS 
         ```kubectl get pod -n monitoring```
