@@ -85,6 +85,7 @@ status:
    4. check the NFS-SUCCESS file created by test-pod.yaml  
       + ```sudo mount -t nfs 10.86.1.244:/var/nfs /mnt```   
       + you should see new file name NFS-SUCCESS in ```ls -al /mnt```   
+      + ```sudo rm /mnt/NFS-SUCCESS```
       + ```umount /mnt```   
 #### 6. Create prometheus-config.yaml
 ```
