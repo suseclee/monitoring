@@ -32,13 +32,13 @@ export NODE_IP=$(kubectl get nodes --namespace monitoring -o jsonpath="{.items[0
 echo http://$NODE_IP:$NODE_PORT
 ```
 #### 7-1. On Prometheus from url #7, you can query to Prometheus using Promethues web (optional).
-#### 8. Replace ```<prometheus.server.ip.address>:<port>``` into ```<url>:<port>``` from #7 in prometheus-grafana-datasource.yaml 
+#### 8. Replace ```<prometheus.server.ip.address>:<port>``` in prometheus-grafana-datasource.yaml  into ```<url>:<port>``` from #7 
       url: http://<prometheus.server.ip.address>:<port>
 #### 9. Create a configMap for mapping between Prometheus and Grafana
 ```kubectl create -f prometheus-grafana-datasource.yaml``` 
 #### 10. Create Grafana using helm with grafana-config.yaml
 ```helm install stable/grafana --namespace monitoring --name grafana --values grafana-config.yaml``` 
-#### 11. grafana will take up to 10 min if Grafana has a persistent option. check if all the three pods are deployed.
+#### 11. Grafana will take up to 10 min if Grafana has a persistent option. check if all the three pods are deployed.
 ```kubectl -n monitoring get po | grep grafana```
 #### 12. Login to grafana web
    * Get Grafana url from the following:  
