@@ -1,6 +1,6 @@
 # Monitoring Prometheus and Grafana with NFS persistentVolumes
 
-*Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin.monitoring.html. This version is for a slim version of the original deployment. This does not require any storage and secret. This version also disabled alertManager in Prometheus. NFS server is 10.86.1.244:/var/nfs which is behind SUSE VPN.*
+*Full Docs : https://w3.nue.suse.com/~mnapp/2018-11-19/book.caasp.admin/cha.admin.monitoring.html. This version is for a slim version of the original deployment. This requires NFS storage but does not need secrets. This version also enabled alertManager in Prometheus. NFS server is 10.86.1.244:/var/nfs which is behind SUSE VPN.*
 
 #### 1. Create a new namespace for monitoring 
 ```kubectl create namespace monitoring```
