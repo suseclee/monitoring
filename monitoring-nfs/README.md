@@ -54,7 +54,7 @@ echo http://$NODE_IP:$NODE_PORT
     2. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
     3. Now select the "Prometheus" datasource in the prometheus field and click on the import button.
 ```
-#### 14. There are extra dashboards configured for CAASP. To appply this
+#### 14. There are extra dashboards configured for CAASP. To apply these
 ```
     1. git clone https://github.com/kubic-project/monitoring.git
     2. kubectl apply -f monitoring/grafana-dashboards-caasp-cluster.yaml
