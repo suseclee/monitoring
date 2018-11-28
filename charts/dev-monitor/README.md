@@ -10,7 +10,8 @@
 ```kubectl -n monitoring get po | grep prometheus```
 #### 6. Check if grafana is deployed well
 ```kubectl -n monitoring get po | grep grafana```
-#### 7. Login to grafana web: 10.17.2.0:3001
+#### 6-1. you can try queries in Prometheus web: 10.17.2.0:31313 (optional).
+#### 7. Login to grafana web: 10.17.2.0:31314
    * Login to grafana web with admin/admin (default username/password), enter new password.   
 #### 8. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
