@@ -1,10 +1,15 @@
 #### 1. Create a new namespace for monitoring 
 ```kubectl create namespace monitoring```
-#### 2. ```git clone https://github.com/suseclee/monitoring.git```
-#### 3. ```cd monitoring/charts```
-#### 4. ```helm install  ./monitor --namespace monitoring --name monitor```
-#### 5. ```kubectl -n monitoring get po | grep prometheus```
-#### 6. ```kubectl -n monitoring get po | grep grafana```
+#### 2. git clone for a local monitor chart
+```git clone https://github.com/suseclee/monitoring.git```
+#### 3. Move to local chart repo 
+```cd monitoring/charts```
+#### 4. Install Prometheus and Grafana in the monitor chart
+```helm install  ./monitor --namespace monitoring --name monitor```
+#### 5. Check if prometheus is deployed well 
+```kubectl -n monitoring get po | grep prometheus```
+#### 6. Check if grafana is deployed well
+```kubectl -n monitoring get po | grep grafana```
 #### 7. Login to grafana web: 10.17.2.0:3001
    * Login to grafana web with admin/admin (default username/password), enter new password.   
 #### 8. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
