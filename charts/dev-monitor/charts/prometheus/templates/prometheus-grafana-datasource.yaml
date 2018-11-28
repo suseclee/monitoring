@@ -14,7 +14,7 @@ data:
     datasources:
     - name: Prometheus
       type: prometheus
-      url: http://10.17.2.0:313130
+      url: http://10.17.2.0:31313
       access: proxy
       orgId: 1
       isDefault: true

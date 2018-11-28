@@ -57,7 +57,7 @@ service:
   type: NodePort
   port: 80
   #servicePort: 80
-  nodePort: 313131
+  nodePort: 31314
   annotations: {}
   labels: {}
 
