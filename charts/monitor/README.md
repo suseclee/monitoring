@@ -15,7 +15,7 @@
 #### 8. Add a new dashboard in the garfana web - "Kubernetes All Nodes" will be shown "System load" panel only.
 ```
     1. hover your mousecursor over the + button on the left sidebar and click on the import.
-    2. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
+    2. Paste the URL (for example) https://grafana.com/dashboards/3131 into the first input field (Grafana.com Dashboard) to import the "Kubernetes All Nodes" Grafana Dashboard. After pasting in the url, the view will change to another form.
     3. Now select the "Prometheus" datasource in the prometheus field and click on the import button.
 ```
 #### 9. There are extra dashboards configured for CAASP. To apply these:
