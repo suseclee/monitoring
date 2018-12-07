@@ -1,5 +1,5 @@
 # Monitoring CAASP with Prometheus and Grafana
-There are three option you can choose.
+There are three options you can choose.
 ### 1. local chart without PersistentVolumes
  Premetheus and grafana are preconfigured  
  [go to chart monitor](charts/monitor)
